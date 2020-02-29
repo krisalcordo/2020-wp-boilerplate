@@ -1,6 +1,6 @@
-let mix = require('laravel-mix');
-var LiveReloadPlugin = require('webpack-livereload-plugin');
-// window.jQuery = window.$ = require('jquery');
+const mix = require('laravel-mix');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+const webpack = require('webpack');
 
 
 mix.scripts([
@@ -12,9 +12,25 @@ mix.scripts([
 	})
 	.webpackConfig({
 		plugins: [
-			new LiveReloadPlugin()
+			new LiveReloadPlugin(),
+			new webpack.ProvidePlugin({
+				'$': 'jquery',
+				'jQuery': 'jquery',
+				'window.jQuery': 'jquery',
+			}),
 		]
-	});
+	})
+	.options({
+		uglify: {
+			uglifyOptions: {
+			  compress: {
+				drop_console: true,
+				drop_debugger: true
+			  }
+			}
+		}
+	})
+	.disableSuccessNotifications();
 
 /*
  |--------------------------------------------------------------------------
