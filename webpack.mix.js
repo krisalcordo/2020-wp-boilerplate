@@ -4,7 +4,8 @@ const webpack = require('webpack');
 
 
 mix.scripts([
-		'./src/js/*.js'
+		'./src/js/*.js',
+		'!./src/js/ignore.*.js'
 	], './public/script.js')
 	.sass('./src/css/style.scss', './public/style.css')
 	.browserSync({
