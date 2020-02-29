@@ -120,8 +120,15 @@ add_action( 'widgets_init', 'kris_alcordo_boilerplate_widgets_init' );
  * Enqueue scripts and styles.
  */
 function kris_alcordo_boilerplate_scripts() {
-	wp_enqueue_style( 'kris-alcordo-boilerplate-style', get_stylesheet_uri() );
+	// Enqueue Dist Styles
+	wp_enqueue_style( 'kris-alcordo-boilerplate-style', get_template_directory_uri() . '/public/style.css' );
 
+	//Enqueue jQuery
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js", false, null, true);
+	wp_enqueue_script('jquery');
+
+	//Underscores Prefab
 	wp_enqueue_script( 'kris-alcordo-boilerplate-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'kris-alcordo-boilerplate-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
